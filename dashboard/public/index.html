@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Past In A Minute — Episode Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="hourglass-icon"></div>
+      <div>
+        <h1>PAST IN A MINUTE</h1>
+        <p class="tagline">History, One Day At A Time — Episode Dashboard</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button id="btn-add" class="btn btn-gold">+ New Episode</button>
+      <button id="btn-upload" class="btn btn-outline">Upload CSV</button>
+      <button id="btn-sync" class="btn btn-outline">Sync Google Sheet</button>
+      <input type="file" id="csv-input" accept=".csv" style="display:none" />
+    </div>
+  </header>
+
+  <section class="stats" id="stats"></section>
+
+  <main>
+    <table id="episode-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Date</th>
+          <th>Title</th>
+          <th>Status</th>
+          <th>Voice</th>
+          <th>Render</th>
+          <th>Notes</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="episode-body"></tbody>
+    </table>
+  </main>
+
+  <!-- Add/Edit Episode Modal -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-box">
+      <h2>Add Episode</h2>
+      <form id="episode-form">
+        <label>ID <input name="id" placeholder="EP003 (auto agar khali)" /></label>
+        <label>Date <input name="date" placeholder="19 July 1545" required /></label>
+        <label>Title <input name="title" required /></label>
+        <label>Hook (Scene 1) <textarea name="hook" required></textarea></label>
+        <label>Fact (Scene 2) <textarea name="fact" required></textarea></label>
+        <label>Twist (Scene 3) <textarea name="twist" required></textarea></label>
+        <label>Reflection (Scene 4) <textarea name="reflection" required></textarea></label>
+        <label>CTA (Scene 5) <textarea name="cta" required></textarea></label>
+        <label>Notes <textarea name="notes"></textarea></label>
+        <div class="modal-actions">
+          <button type="button" id="btn-cancel" class="btn btn-outline">Cancel</button>
+          <button type="submit" class="btn btn-gold">Save Episode</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Sync Sheet Modal -->
+  <div id="sheet-modal" class="modal hidden">
+    <div class="modal-box">
+      <h2>Sync from Google Sheet</h2>
+      <p class="hint">
+        Sheet mein: File → Share → Publish to web → format "CSV" select karein,
+        jo link mile wo yahan paste karein.
+      </p>
+      <input type="text" id="sheet-url" placeholder="https://docs.google.com/spreadsheets/d/.../pub?output=csv" />
+      <div class="modal-actions">
+        <button type="button" id="btn-sheet-cancel" class="btn btn-outline">Cancel</button>
+        <button type="button" id="btn-sheet-sync" class="btn btn-gold">Sync Now</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

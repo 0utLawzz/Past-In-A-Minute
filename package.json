@@ -1,0 +1,32 @@
+{
+  "name": "past-in-a-minute-studio",
+  "version": "1.0.0",
+  "description": "Static, offline, no-API-key video production tool for the Past In A Minute history channel",
+  "type": "module",
+  "scripts": {
+    "dashboard": "node dashboard/server.mjs",
+    "fetch-sheet": "node scripts/fetch-sheet.mjs",
+    "csv-to-json": "node scripts/csv-to-json.mjs",
+    "tts": "node scripts/tts.mjs",
+    "render": "node scripts/render.mjs",
+    "remotion:preview": "remotion studio remotion/src/index.ts"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.502",
+    "@remotion/renderer": "^4.0.502",
+    "csv-parse": "5.5.6",
+    "csv-stringify": "6.5.1",
+    "express": "^4.22.2",
+    "multer": "^2.2.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "^4.0.502"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.3",
+    "typescript": "5.5.4"
+  },
+  "allowScripts": {
+    "esbuild@0.28.1": true
+  }
+}

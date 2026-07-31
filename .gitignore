@@ -1,0 +1,6 @@
+node_modules/
+piper/
+test.wav
+output/
+.env
+.DS_Store
