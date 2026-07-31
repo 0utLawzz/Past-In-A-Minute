@@ -17,8 +17,8 @@ const AUDIO_DIR = path.resolve("remotion/public/audio");
 
 // Piper executable ka path -- Windows pe aam taur pe piper.exe hota hai jo
 // aap ne piper/ folder mein rakha hoga (README dekhein download ke liye)
-const PIPER_EXE = process.env.PIPER_PATH || "piper";
-const PIPER_MODEL = process.env.PIPER_MODEL || "./piper/en_US-lessac-medium.onnx";
+const PIPER_EXE = process.env.PIPER_PATH || path.resolve("piper/piper.exe");
+const PIPER_MODEL = process.env.PIPER_MODEL || path.resolve("piper/en_US-lessac-medium.onnx");
 
 async function ensureAudioDir() {
   await fs.mkdir(AUDIO_DIR, { recursive: true });

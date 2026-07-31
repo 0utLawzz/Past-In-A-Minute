@@ -20,14 +20,16 @@ async function ensureOutputDir() {
 }
 
 function renderOne(episode) {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     const outputFile = path.join(OUTPUT_DIR, `${episode.id}.mp4`);
+    const propsFile = path.join(OUTPUT_DIR, `props_${episode.id}.json`);
     const audioFileName =
       episode.status === "voice_ready" || episode.status === "video_rendered" || episode.status === "uploaded"
         ? `${episode.id}.wav`
         : undefined;
 
     const props = JSON.stringify({ episode, audioFileName });
+    await fs.writeFile(propsFile, props, "utf-8");
 
     console.log(`\n🎬 Rendering ${episode.id} — "${episode.title}"`);
 
@@ -40,7 +42,7 @@ function renderOne(episode) {
         "remotion/src/index.ts",
         "EpisodeVideo",
         outputFile,
-        `--props=${props}`,
+        `--props=${propsFile}`,
       ],
       { stdio: "inherit", shell: true }
     );
