@@ -14,13 +14,14 @@ import { spawn } from "node:child_process";
 const EPISODES_JSON = path.resolve("content/episodes.json");
 const AUDIO_DIR = path.resolve("remotion/public/audio");
 
-// Piper model path (supports default en_US-amy-medium.onnx or en_US-lessac-medium.onnx or PIPER_MODEL env)
+// Piper model path — prefers PIPER_MODEL env var, then named arg, then first available model
 function getPiperModel(modelName) {
   if (process.env.PIPER_MODEL) return process.env.PIPER_MODEL;
   if (modelName) return path.resolve(`piper/${modelName}`);
-  const amyPath = path.resolve("piper/en_US-amy-medium.onnx");
+  // Auto-detect: prefer lessac, fall back to amy
   const lessacPath = path.resolve("piper/en_US-lessac-medium.onnx");
-  return amyPath;
+  const amyPath = path.resolve("piper/en_US-amy-medium.onnx");
+  return lessacPath; // lessac is the downloaded default on Replit
 }
 
 async function ensureAudioDir() {
@@ -34,11 +35,18 @@ function buildScriptText(ep) {
 
 function runPiper(text, outputFile, modelPath) {
   return new Promise((resolve, reject) => {
-    const piperExe = path.resolve("piper/piper.exe");
+    const isWin = process.platform === "win32";
+    const piperExe = isWin
+      ? path.resolve("piper/piper.exe")
+      : path.resolve("piper/piper");
 
-    // Check if piper.exe and model exist
+    // Check if piper binary and model exist
     const runPiperExe = () => {
-      const piper = spawn(piperExe, ["--model", modelPath, "--output_file", outputFile]);
+      const piperEnv = {
+        ...process.env,
+        LD_LIBRARY_PATH: [path.resolve("piper"), process.env.LD_LIBRARY_PATH].filter(Boolean).join(":"),
+      };
+      const piper = spawn(piperExe, ["--model", modelPath, "--output_file", outputFile], { env: piperEnv });
       piper.stdin.write(text);
       piper.stdin.end();
 
