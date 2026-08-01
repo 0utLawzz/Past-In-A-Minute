@@ -1,6 +1,9 @@
 node_modules/
 piper/
-test.wav
 output/
 .env
 .DS_Store
+*.dll
+test_*.bat
+test_*.txt
+input.txt

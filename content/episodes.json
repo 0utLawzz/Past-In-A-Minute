@@ -1,6 +1,6 @@
 [
   {
-    "id": "EP001",
+    "id": "EP0010",
     "date": "19 July 1545",
     "title": "The Mary Rose Sinks",
     "hook": "One ship. One battle. One terrible mistake.",
@@ -8,11 +8,11 @@
     "twist": "It wasn't the enemy that sank her. Open gunports and a sudden turn let the sea pour straight in.",
     "reflection": "Sometimes the greatest threats aren't the ones we're watching for.",
     "cta": "Follow Past In A Minute for tomorrow's story.",
-    "status": "video_rendered",
+    "status": "voice_ready",
     "notes": "First sample episode"
   },
   {
-    "id": "EP002",
+    "id": "EP0020",
     "date": "4 August 64 AD",
     "title": "The Great Fire of Rome",
     "hook": "A city built of wood. A fire that wouldn't stop.",
@@ -20,7 +20,7 @@
     "twist": "Nero didn't fiddle while Rome burned -- he wasn't even in the city when it started.",
     "reflection": "History remembers the myth longer than the man.",
     "cta": "Follow Past In A Minute for tomorrow's story.",
-    "status": "video_rendered",
+    "status": "voice_ready",
     "notes": "Second sample episode"
   }
 ]

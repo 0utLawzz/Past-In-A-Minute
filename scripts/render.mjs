@@ -33,18 +33,21 @@ function renderOne(episode) {
 
     console.log(`\n🎬 Rendering ${episode.id} — "${episode.title}"`);
 
-    // npx remotion render <entry> <composition-id> <output> --props='...'
+    const isWin = process.platform === "win32";
+    const remotionBin = isWin
+      ? path.resolve("node_modules/.bin/remotion.cmd")
+      : path.resolve("node_modules/.bin/remotion");
+
     const child = spawn(
-      "npx",
+      remotionBin,
       [
-        "remotion",
         "render",
         "remotion/src/index.ts",
         "EpisodeVideo",
         outputFile,
         `--props=${propsFile}`,
       ],
-      { stdio: "inherit", shell: true }
+      { stdio: "inherit", shell: isWin }
     );
 
     child.on("close", (code) => {
